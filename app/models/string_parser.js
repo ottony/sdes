@@ -3,11 +3,10 @@ import _ from 'underscore';
 
 class StringParser {
   static toBin(raw, max = 10) {
-    let chars = raw.toString().split('');
+    let buffer = new Buffer(raw)
 
-    return _.map(chars, (char) => {
-      let bin           = char.charCodeAt().toString(2);
-      return( new Bin(bin, max) );
+    return _.map(buffer, (char) => {
+      return(new Bin(char.toString(2), max));
     });
   }
 }

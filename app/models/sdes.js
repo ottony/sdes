@@ -4,20 +4,20 @@ import _ from 'underscore';
 class SDes {
   static p10(bin) {
     return bin.copy().permute(
-        [2, 4, 1, 6, 3, 9, 0, 8, 7, 5]
-        );
+      [2, 4, 1, 6, 3, 9, 0, 8, 7, 5]
+    );
   }
 
   static p8(bin) {
     return bin.copy().permute(
-        [5, 2, 6, 3, 7, 4, 9, 8]
-        );
+      [5, 2, 6, 3, 7, 4, 9, 8]
+    );
   }
 
   static p4(bin) {
     return bin.copy().permute(
-        [1, 3, 2, 0]
-        );
+      [1, 3, 2, 0]
+    );
   }
 
   static s0(bin) {
@@ -61,7 +61,7 @@ class SDes {
 
   static splitAndShift(bin, offset) {
     let sa, sb;
-    [sa, sb]           = bin.split();
+    [sa, sb] = bin.split();
 
     let shift = [
       ...this.shift(sa, offset),
