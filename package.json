@@ -1,0 +1,22 @@
+{
+  "name": "sdes",
+  "version": "1.0.0",
+  "description": "Simple Des implementation",
+  "main": "app/index.js",
+  "scripts": {
+    "prestart": "babel app --out-dir dist",
+    "dev": "nodemon --exec babel-node app/index.js",
+    "start": "node dist/index.js"
+  },
+  "author": "Ottony Costa",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^6.5.2",
+    "commander": "^2.9.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-preset-es2015": "^6.14.0",
+    "nodemon": "^1.10.2"
+  }
+}
