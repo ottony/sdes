@@ -9,7 +9,7 @@
     "start": "node dist/index.js"
   },
   "author": "Ottony Costa",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "babel": "^6.5.2",
     "commander": "^2.9.0",
