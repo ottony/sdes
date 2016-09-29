@@ -15,21 +15,21 @@ class Bin {
     let bin  = _.clone(this.bin);
     let size = _.size(bin);
 
-    if(_.isArray(bin)) {
-
+    if(_.isArray(bin))
       bin = bin.join('');
-    }
 
-    return `${'0'.repeat(this.size)}${ bin }`.slice(-this.size).split('');
+    let zeros = '0'.repeat(Math.abs(this.size - size));
+
+    return `${zeros}${bin}`.slice(-this.size).split('');
   }
 
   split() {
-    let normalized =        this.normalized;
-    let halfSize = this.size / 2;
+    let normalized = this.normalized;
+    let halfSize   = this.size / 2;
     let left  = _.clone(normalized);
     let right = left.splice(halfSize);
 
-    return([left,         right]);
+    return([left, right]);
   }
 
   asString() {
@@ -94,8 +94,8 @@ class Bin {
     );
   }
 
-  sdesCrypt(k1, k2) {
-    return SDes.crypt(this, k1, k2);
+  sdesCrypt(key) {
+    return SDes.crypt(this, key);
   }
 }
 
