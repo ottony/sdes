@@ -16,6 +16,15 @@ BufferCrypt.sdesDecrypt(key, buffer)
 `key` is a integer key with 10 bits, that means betwen 0 and 1023.
 `buffer` is a node Buffer, see https://nodejs.org/api/buffer.html to more exaplanation.
 
+## Development
+
+To use in development, you should install the dependencies and run npm as dev mode. It will watch your files and automatically reload the application per update.
+
+```shell
+npm install
+npm run dev
+```
+
 # Example
 
 ```javascript
