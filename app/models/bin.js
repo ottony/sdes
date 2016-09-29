@@ -62,8 +62,10 @@ class Bin {
       return this;
     let normalized = this.normalized;
 
-    this.bin = _.map(list, (b, i) => {
+    this.bin = _.map(list, (_b, i) => {
+      let b = parseInt(_b);
       let xorResult = (normalized[i] == 1) ? !b : b;
+
       return (!!xorResult) ? 1 : 0;
     }).join('');
 
