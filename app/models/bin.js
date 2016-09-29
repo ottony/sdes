@@ -36,14 +36,18 @@ class Bin {
     return this.normalized.join('');
   }
 
-  toChar() {
-    let ascii = parseInt(this.bin,2).toString(10);
+  toDecimal() {
+    return parseInt(
+      parseInt(this.bin,2).toString(10)
+    );
+  }
 
-    return String.fromCharCode(ascii);
+  toChar() {
+    return String.fromCharCode(this.toDecimal());
   }
 
   copy() {
-    return( new Bin(this.bin) );
+    return( new Bin(this.bin, this.maxSize) );
   }
 
   permute(permutation) {
