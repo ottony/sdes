@@ -3,12 +3,11 @@ BufferCrypt contains a Simple DES implementation with javascript.
 S-DES is a didatic implementation of DES algorithm.
 
 # Using
-First, import the dist/index.js file. It contain a BufferCrypt object with sdesEncrypt and sdesDecrypt static functions 
+First, import the dist/index.js file. It contain a BufferCrypt object with `sdesEncrypt` and `sdesDecrypt` static functions 
 
 ```javascript
 BufferCrypt.sdesEncrypt(key, buffer)
 ```
-and
 
 ```javascript
 BufferCrypt.sdesDecrypt(key, buffer)
