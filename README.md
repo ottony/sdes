@@ -18,7 +18,7 @@ BufferCrypt.sdesDecrypt(key, buffer)
 
 #### Alert
 Babel@6 doesn't export default module.exports any more - https://github.com/babel/babel/issues/2212
-so, when you require de file, call `.default` from that.
+so, when you require the file, call `.default` from that.
 
 ```javascript
   var BufferCrypt = require('./dist/index.js').default;
