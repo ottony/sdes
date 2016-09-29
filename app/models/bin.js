@@ -1,7 +1,7 @@
 import SDes from './sdes.js';
 import _ from 'underscore';
 
-class Bin {
+export default class Bin {
   constructor(bin, maxSize = _.size(bin)) {
     this.bin = bin;
     this.maxSize = maxSize;
@@ -102,5 +102,3 @@ class Bin {
     return SDes.decrypt(this, key);
   }
 }
-
-export default Bin;

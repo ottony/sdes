@@ -1,7 +1,7 @@
 import Bin from './bin.js';
 import _ from 'underscore';
 
-class BufferCrypt {
+export default class BufferCrypt {
   static sdesEncrypt(keyRaw, buffer) {
     let key  = new Bin(keyRaw.toString(2), 10);
     let bins = this.toBin(buffer);
@@ -30,5 +30,3 @@ class BufferCrypt {
     });
   }
 }
-
-export default BufferCrypt;

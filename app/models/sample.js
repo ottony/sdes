@@ -3,7 +3,7 @@ import Bin from './bin.js';
 import SDes from './sdes.js';
 import _ from 'underscore';
 
-class Sample {
+export default class Sample {
   static show() {
     let raw = new Buffer('|><+-àèìÒù');
     let key = parseInt((Math.random() * 1000));
@@ -18,5 +18,3 @@ class Sample {
     console.log(`decrypted = ${dec.toString()}`);
   }
 }
-
-export default Sample;

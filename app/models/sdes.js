@@ -1,7 +1,7 @@
 import Bin from './bin.js';
 import _ from 'underscore';
 
-class SDes {
+export default class SDes {
   static p10(bin) {
     return bin.copy().permute(
       [2, 4, 1, 6, 3, 9, 0, 8, 7, 5]
@@ -150,5 +150,3 @@ class SDes {
     return this.inverse_ip(fk1);
   }
 }
-
-export default SDes;
