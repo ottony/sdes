@@ -2,7 +2,7 @@ import SDes from './sdes.js';
 import _ from 'underscore';
 
 class Bin {
-  constructor(bin, maxSize = 10) {
+  constructor(bin, maxSize = _.size(bin)) {
     this.bin = bin;
     this.maxSize = maxSize;
   }
@@ -12,9 +12,10 @@ class Bin {
   }
 
   get normalized() {
-    let bin = _.clone(this.bin);
+    let bin  = _.clone(this.bin);
+    let size = _.size(bin);
+
     if(_.isArray(bin)) {
-      if(_.size(bin) == this.size) return bin;
 
       bin = bin.join('');
     }
@@ -42,7 +43,7 @@ class Bin {
   }
 
   copy() {
-    return( new Bin(this.bin, this.maxSize) );
+    return( new Bin(this.bin) );
   }
 
   permute(permutation) {
@@ -77,15 +78,18 @@ class Bin {
     }, '');
 
     return parseInt(
-        parseInt(cordinate, 2).toString(10)
-        );
+      parseInt(cordinate, 2).toString(10)
+    );
   }
 
   sbox(box, lineC, columnC) {
     let line   = this.cordinatesToDecimal(lineC);
     let column = this.cordinatesToDecimal(columnC);
+    let value  = box[line][column];
 
-    return box[line][column];
+    return(
+      new Bin(value.toString(2), this.size / 2).normalized
+    );
   }
 
   sdesCrypt(k1, k2) {

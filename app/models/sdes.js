@@ -28,7 +28,7 @@ class SDes {
       [3, 1, 3, 2]
     ];
 
-      return bin.sbox(b, [0, 3], [1, 2]);
+    return bin.sbox(b, [0, 3], [1, 2]);
   }
 
   static s1(bin) {
@@ -39,7 +39,7 @@ class SDes {
       [2, 1, 0, 3]
     ];
 
-      return bin.sbox(b, [0, 3], [1, 2]);
+    return bin.sbox(b, [0, 3], [1, 2]);
   }
 
   static expand(bin) {
@@ -68,7 +68,7 @@ class SDes {
       ...this.shift(sb, offset)
     ];
 
-    return( new Bin(shift, this.size) );
+    return( new Bin(shift) );
   }
 
   static shift(list, offset) {
@@ -85,11 +85,11 @@ class SDes {
     [s0, s1] = bin.split();
 
     let result = [
-      ...this.s0(new Bin(s0, bin.size / 2)),
-      ...this.s1(new Bin(s1, bin.size / 2))
+      ...this.s0(new Bin(s0)),
+      ...this.s1(new Bin(s1))
     ];
 
-    return( new Bin(result, bin.size / 2) );
+    return( new Bin(result) );
   }
 
   static crypt(bin, k1, k2) {

@@ -12,10 +12,13 @@ class Main {
     let k1, k2;
     [k1, k2] = SDes.keys(new Bin('1010000010'));
 
+    console.log('k1:');
     console.log(k1.asString());
+    console.log('k2:');
     console.log(k2.asString());
+    console.log('sbox:');
     console.log(SDes.sbox(
-        new Bin('00101011', 8)
+        new Bin('00101011')
       ).asString()
     );
   }
