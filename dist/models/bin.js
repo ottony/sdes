@@ -20,7 +20,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var Bin = function () {
   function Bin(bin) {
-    var maxSize = arguments.length <= 1 || arguments[1] === undefined ? 10 : arguments[1];
+    var maxSize = arguments.length <= 1 || arguments[1] === undefined ? _underscore2.default.size(bin) : arguments[1];
 
     _classCallCheck(this, Bin);
 
@@ -44,11 +44,9 @@ var Bin = function () {
       return this.normalized.join('');
     }
   }, {
-    key: 'toChar',
-    value: function toChar() {
-      var ascii = parseInt(this.bin, 2).toString(10);
-
-      return String.fromCharCode(ascii);
+    key: 'toDecimal',
+    value: function toDecimal() {
+      return parseInt(parseInt(this.bin, 2).toString(10));
     }
   }, {
     key: 'copy',
@@ -73,8 +71,10 @@ var Bin = function () {
       if (_underscore2.default.size(list) != this.size) return this;
       var normalized = this.normalized;
 
-      this.bin = _underscore2.default.map(list, function (b, i) {
+      this.bin = _underscore2.default.map(list, function (_b, i) {
+        var b = parseInt(_b);
         var xorResult = normalized[i] == 1 ? !b : b;
+
         return !!xorResult ? 1 : 0;
       }).join('');
 
@@ -96,13 +96,19 @@ var Bin = function () {
     value: function sbox(box, lineC, columnC) {
       var line = this.cordinatesToDecimal(lineC);
       var column = this.cordinatesToDecimal(columnC);
+      var value = box[line][column];
 
-      return box[line][column];
+      return new Bin(value.toString(2), this.size / 2).normalized;
     }
   }, {
     key: 'sdesCrypt',
-    value: function sdesCrypt(k1, k2) {
-      return _sdes2.default.crypt(this, k1, k2);
+    value: function sdesCrypt(key) {
+      return _sdes2.default.crypt(this, key);
+    }
+  }, {
+    key: 'sdesDecrypt',
+    value: function sdesDecrypt(key) {
+      return _sdes2.default.decrypt(this, key);
     }
   }, {
     key: 'size',
@@ -113,13 +119,13 @@ var Bin = function () {
     key: 'normalized',
     get: function get() {
       var bin = _underscore2.default.clone(this.bin);
-      if (_underscore2.default.isArray(bin)) {
-        if (_underscore2.default.size(bin) == this.size) return bin;
+      var size = _underscore2.default.size(bin);
 
-        bin = bin.join('');
-      }
+      if (_underscore2.default.isArray(bin)) bin = bin.join('');
 
-      return ('' + '0'.repeat(this.size) + bin).slice(-this.size).split('');
+      var zeros = '0'.repeat(Math.abs(this.size - size));
+
+      return ('' + zeros + bin).slice(-this.size).split('');
     }
   }]);
 
