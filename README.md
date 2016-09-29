@@ -72,5 +72,8 @@ decrypted
 * Specs
 
 # Some references
+
+
 http://homepages.gac.edu/~holte/courses/mcs150-J01/documents/DESinstructions.html
+
 http://homepages.gac.edu/~holte/courses/mcs150-J01/documents/DESexample.html
