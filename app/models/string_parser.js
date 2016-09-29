@@ -3,7 +3,7 @@ import _ from 'underscore';
 
 class StringParser {
   static sdesEncrypt(keyRaw, buffer) {
-    let key  = new Bin(keyRaw, 10);
+    let key  = new Bin(keyRaw.toString(2), 10);
     let bins = this.toBin(buffer);
 
     let crypted = _.map(bins, (b) => {
@@ -14,7 +14,7 @@ class StringParser {
   }
 
   static sdesDecrypt(keyRaw, buffer) {
-    let key  = new Bin(keyRaw, 10);
+    let key  = new Bin(keyRaw.toString(2), 10);
     let bins = this.toBin(buffer);
 
     let decrypted = _.map(bins, (b) => {

@@ -6,14 +6,16 @@ import _ from 'underscore';
 class Main {
   static teste() {
     let raw = new Buffer('|><+-àèìÒù');
-    let key = '0010010111';
+    let key = parseInt((Math.random() * 1000));
     let enc = StringParser.sdesEncrypt(key, raw);
     let msg = enc.toString();
     let dec = StringParser.sdesDecrypt(key, enc);
 
-    console.log(raw.toString());
-    console.log(enc.toString());
-    console.log(dec.toString());
+    console.log(`using key ${key}`);
+
+    console.log(`original  = ${raw.toString()}`);
+    console.log(`encrypted = ${enc.toString()}`);
+    console.log(`decrypted = ${dec.toString()}`);
   }
 }
 
