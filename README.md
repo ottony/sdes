@@ -16,6 +16,14 @@ BufferCrypt.sdesDecrypt(key, buffer)
 `key` is a integer key with 10 bits, that means betwen 0 and 1023.
 `buffer` is a node Buffer, see https://nodejs.org/api/buffer.html to more explanation.
 
+#### Alert
+Babel@6 doesn't export default module.exports any more - https://github.com/babel/babel/issues/2212
+so, when you require de file, call `.default` from that.
+
+```javascript
+  var BufferCrypt = require('./dist/index.js').default;
+```
+
 ## Development
 
 To use in development, you should install the dependencies and run npm as dev mode. It will watch your files and automatically reload the application per update.
