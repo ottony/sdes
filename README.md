@@ -14,7 +14,7 @@ BufferCrypt.sdesDecrypt(key, buffer)
 ```
 
 `key` is a integer key with 10 bits, that means betwen 0 and 1023.
-`buffer` is a node Buffer, see https://nodejs.org/api/buffer.html to more exaplanation.
+`buffer` is a node Buffer, see https://nodejs.org/api/buffer.html to more explanation.
 
 ## Development
 
