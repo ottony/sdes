@@ -44,8 +44,8 @@ class SDes {
 
   static expand(bin) {
     return bin.copy().permute(
-        [3, 0, 1, 2, 1, 2, 3, 0]
-        );
+      [3, 0, 1, 2, 1, 2, 3, 0]
+    );
   }
 
   static keys(key) {
@@ -92,12 +92,31 @@ class SDes {
     return( new Bin(result) );
   }
 
-  static crypt(bin, k1, k2) {
-    let left, right;
-    [left, right] = bin.staticplit();
+  static switchToBin(left, right) {
+    return new Bin([
+      ...right,
+      ...left
+    ]);
+  }
 
-    let expanded = this.expand(new Bin(right));
-    expanded.xor(k1);
+  static crypt(bin, key) {
+    let left, right, expanded, sbox, p4;
+    let keys = this.keys(key);
+    let encrypt = bin.copy();
+
+    _.each(keys, (k) => {
+      [left, right] = encrypt.split();
+
+      expanded = this.expand(new Bin(right));
+      expanded.xor(k.normalized);
+      sbox = this.sbox(expanded);
+      p4   = this.p4(sbox);
+      p4.xor(left);
+
+      encrypt = this.switchToBin(p4.normalized, right);
+    });
+
+    return encrypt;
   }
 }
 
