@@ -2,9 +2,9 @@ import Bin from './bin.js';
 import _ from 'underscore';
 
 class StringParser {
-  static sdesEncrypt(keyRaw, raw, encoding = '') {
+  static sdesEncrypt(keyRaw, buffer) {
     let key  = new Bin(keyRaw, 10);
-    let bins = this.toBin(raw);
+    let bins = this.toBin(buffer);
 
     let crypted = _.map(bins, (b) => {
       return b.sdesCrypt(key).toDecimal();
@@ -13,20 +13,18 @@ class StringParser {
     return new Buffer(crypted);
   }
 
-  static sdesDecrypt(keyRaw, raw, encoding = '') {
+  static sdesDecrypt(keyRaw, buffer) {
     let key  = new Bin(keyRaw, 10);
-    let bins = this.toBin(raw, encoding);
+    let bins = this.toBin(buffer);
 
     let decrypted = _.map(bins, (b) => {
       return b.sdesDecrypt(key).toDecimal();
     });
 
-    return new Buffer(decrypted, encoding);
+    return new Buffer(decrypted);
   }
 
-  static toBin(raw, encoding = '') {
-    let buffer = new Buffer(raw, encoding);
-
+  static toBin(buffer) {
     return _.map(buffer, (char) => {
       return(new Bin(char.toString(2), 8));
     });
