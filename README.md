@@ -36,7 +36,7 @@ BufferCrypt.sdesDecrypt(key, buffer)
   console.log("original");
   console.log(raw);
   console.log("encrypted");
-  console.log("enc");
+  console.log(enc);
   console.log("decrypted");
   console.log(dec)
 ```
@@ -54,7 +54,7 @@ Buffers
 original
 <Buffer 7c 3e 3c 2b 2d c3 a0 c3 a8 c3 ac c3 92 c3 b9>
 encrypted
-enc
+<Buffer 4c 6e dc 7d 13 e9 d9 e9 a0 e9 e5 e9 0b e9 35>
 decrypted
 <Buffer 7c 3e 3c 2b 2d c3 a0 c3 a8 c3 ac c3 92 c3 b9>
 ```
