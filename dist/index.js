@@ -1,18 +1,40 @@
 'use strict';
 
-var _http = require('http');
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-var _main = require('./models/main.js');
+var _buffer_crypt = require('./models/buffer_crypt.js');
 
-var _main2 = _interopRequireDefault(_main);
+var _buffer_crypt2 = _interopRequireDefault(_buffer_crypt);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _http.createServer)(function (request, response) {
+//Creates a node Buffer with you raw text and keep your decimal key.
+//Calling BufferCrypt.sdesEncrypt(keyRaw, buffer) you can encrypt the buffer
+//Calling BufferCrypt.sdesDecrypt(keyRaw, buffer) you can descrypt the buffer
+//
+//Example:
+//
+/*
+ *  let raw = new Buffer('|><+-àèìÒù');
+ *  let key = 666;
+ *  let enc = BufferCrypt.sdesEncrypt(key, raw);
+ *  let dec = BufferCrypt.sdesDecrypt(key, enc);
+ *
+ *  console.log(`using key ${key}`);
+ *
+ *  console.log(`original  = ${raw.toString()}`);
+ *  console.log(`encrypted = ${enc.toString()}`);
+ *  console.log(`decrypted = ${dec.toString()}`);
+ *  console.log('\nBuffers\n');
+ *
+ *  console.log("original");
+ *  console.log(raw);
+ *  console.log("encrypted");
+ *  console.log(enc);
+ *  console.log("decrypted");
+ *  console.log(dec);
+ */
 
-  response.writeHead(200, { 'Content-Type': 'text/plain' });
-  response.end('Hello NSA! \n');
-}).listen(3000);
-
-console.log('Server running at http://127.0.0.1:3000/');
-_main2.default.teste();
+exports.default = _buffer_crypt2.default;

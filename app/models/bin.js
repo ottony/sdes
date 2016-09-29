@@ -42,10 +42,6 @@ class Bin {
     );
   }
 
-  toChar() {
-    return String.fromCharCode(this.toDecimal());
-  }
-
   copy() {
     return( new Bin(this.bin, this.maxSize) );
   }

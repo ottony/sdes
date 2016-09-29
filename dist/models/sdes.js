@@ -43,6 +43,16 @@ var SDes = function () {
       return bin.copy().permute([1, 3, 2, 0]);
     }
   }, {
+    key: 'ip',
+    value: function ip(bin) {
+      return bin.copy().permute([1, 5, 2, 0, 3, 7, 4, 6]);
+    }
+  }, {
+    key: 'inverse_ip',
+    value: function inverse_ip(bin) {
+      return bin.copy().permute([3, 0, 2, 4, 6, 1, 7, 5]);
+    }
+  }, {
     key: 's0',
     value: function s0(bin) {
       var b = [[1, 0, 3, 2], [3, 2, 1, 0], [0, 2, 1, 3], [3, 1, 3, 2]];
@@ -86,7 +96,7 @@ var SDes = function () {
 
       var shift = [].concat(_toConsumableArray(this.shift(sa, offset)), _toConsumableArray(this.shift(sb, offset)));
 
-      return new _bin2.default(shift, this.size);
+      return new _bin2.default(shift);
     }
   }, {
     key: 'shift',
@@ -101,37 +111,89 @@ var SDes = function () {
   }, {
     key: 'sbox',
     value: function sbox(bin) {
-      var s0 = void 0,
-          s1 = void 0;
-
       var _bin$split3 = bin.split();
 
       var _bin$split4 = _slicedToArray(_bin$split3, 2);
 
-      s0 = _bin$split4[0];
-      s1 = _bin$split4[1];
+      var s0 = _bin$split4[0];
+      var s1 = _bin$split4[1];
 
 
-      var result = [].concat(_toConsumableArray(this.s0(new _bin2.default(s0, bin.size / 2))), _toConsumableArray(this.s1(new _bin2.default(s1, bin.size / 2))));
+      var result = [].concat(_toConsumableArray(this.s0(new _bin2.default(s0))), _toConsumableArray(this.s1(new _bin2.default(s1))));
 
-      return new _bin2.default(result, bin.size / 2);
+      return new _bin2.default(result);
+    }
+  }, {
+    key: 'switch',
+    value: function _switch(bin) {
+      var _bin$split5 = bin.split();
+
+      var _bin$split6 = _slicedToArray(_bin$split5, 2);
+
+      var left = _bin$split6[0];
+      var right = _bin$split6[1];
+
+
+      return new _bin2.default([].concat(_toConsumableArray(right), _toConsumableArray(left)));
+    }
+  }, {
+    key: 'fk',
+    value: function fk(bin, k) {
+      var expanded = void 0,
+          sbox = void 0,
+          p4 = void 0;
+
+      var _bin$split7 = bin.split();
+
+      var _bin$split8 = _slicedToArray(_bin$split7, 2);
+
+      var left = _bin$split8[0];
+      var right = _bin$split8[1];
+
+
+      expanded = this.expand(new _bin2.default(right));
+      expanded.xor(k.normalized);
+      sbox = this.sbox(expanded);
+      p4 = this.p4(sbox);
+      p4.xor(left);
+
+      return new _bin2.default([].concat(_toConsumableArray(p4.normalized), _toConsumableArray(right)));
     }
   }, {
     key: 'crypt',
-    value: function crypt(bin, k1, k2) {
-      var left = void 0,
-          right = void 0;
+    value: function crypt(bin, key) {
+      var _keys = this.keys(key);
 
-      var _bin$staticplit = bin.staticplit();
+      var _keys2 = _slicedToArray(_keys, 2);
 
-      var _bin$staticplit2 = _slicedToArray(_bin$staticplit, 2);
-
-      left = _bin$staticplit2[0];
-      right = _bin$staticplit2[1];
+      var k1 = _keys2[0];
+      var k2 = _keys2[1];
 
 
-      var expanded = this.expand(new _bin2.default(right));
-      expanded.xor(k1);
+      var ip = this.ip(bin.copy());
+      var fk1 = this.fk(ip, k1);
+      var sw = this.switch(fk1);
+      var fk2 = this.fk(sw, k2);
+
+      return this.inverse_ip(fk2);
+    }
+  }, {
+    key: 'decrypt',
+    value: function decrypt(bin, key) {
+      var _keys3 = this.keys(key);
+
+      var _keys4 = _slicedToArray(_keys3, 2);
+
+      var k1 = _keys4[0];
+      var k2 = _keys4[1];
+
+
+      var ip = this.ip(bin.copy());
+      var fk2 = this.fk(ip, k2);
+      var sw = this.switch(fk2);
+      var fk1 = this.fk(sw, k1);
+
+      return this.inverse_ip(fk1);
     }
   }]);
 

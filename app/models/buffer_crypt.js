@@ -1,7 +1,7 @@
 import Bin from './bin.js';
 import _ from 'underscore';
 
-class StringParser {
+class BufferCrypt {
   static sdesEncrypt(keyRaw, buffer) {
     let key  = new Bin(keyRaw.toString(2), 10);
     let bins = this.toBin(buffer);
@@ -31,4 +31,4 @@ class StringParser {
   }
 }
 
-export default StringParser;
+export default BufferCrypt;

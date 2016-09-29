@@ -1,15 +1,15 @@
-import StringParser from './string_parser.js';
+import BufferCrypt from './string_parser.js';
 import Bin from './bin.js';
 import SDes from './sdes.js';
 import _ from 'underscore';
 
-class Main {
-  static teste() {
+class Sample {
+  static show() {
     let raw = new Buffer('|><+-àèìÒù');
     let key = parseInt((Math.random() * 1000));
-    let enc = StringParser.sdesEncrypt(key, raw);
+    let enc = BufferCrypt.sdesEncrypt(key, raw);
     let msg = enc.toString();
-    let dec = StringParser.sdesDecrypt(key, enc);
+    let dec = BufferCrypt.sdesDecrypt(key, enc);
 
     console.log(`using key ${key}`);
 
@@ -19,4 +19,4 @@ class Main {
   }
 }
 
-export default Main;
+export default Sample;

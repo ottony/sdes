@@ -1,10 +1,30 @@
-import { createServer } from 'http';
-import Main from './models/main.js';
+import BufferCrypt from './models/buffer_crypt.js';
 
-createServer((request, response) => {
+//Creates a node Buffer with you raw text and keep your decimal key.
+//Calling BufferCrypt.sdesEncrypt(keyRaw, buffer) you can encrypt the buffer
+//Calling BufferCrypt.sdesDecrypt(keyRaw, buffer) you can descrypt the buffer
+//
+//Example:
+//
+/*
+ *  let raw = new Buffer('|><+-àèìÒù');
+ *  let key = 666;
+ *  let enc = BufferCrypt.sdesEncrypt(key, raw);
+ *  let dec = BufferCrypt.sdesDecrypt(key, enc);
+ *
+ *  console.log(`using key ${key}`);
+ *
+ *  console.log(`original  = ${raw.toString()}`);
+ *  console.log(`encrypted = ${enc.toString()}`);
+ *  console.log(`decrypted = ${dec.toString()}`);
+ *  console.log('\nBuffers\n');
+ *
+ *  console.log("original");
+ *  console.log(raw);
+ *  console.log("encrypted");
+ *  console.log(enc);
+ *  console.log("decrypted");
+ *  console.log(dec);
+ */
 
-  response.writeHead(200, {'Content-Type': 'text/plain'});
-  response.end('Hello NSA! \n');
-}).listen(3000);
-
-Main.teste();
+export default BufferCrypt;
