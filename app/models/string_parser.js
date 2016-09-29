@@ -6,7 +6,7 @@ class StringParser {
     let buffer = new Buffer(raw)
 
     return _.map(buffer, (char) => {
-      return(new Bin(char.toString(2)));
+      return(new Bin(char.toString(2), 8));
     });
   }
 }

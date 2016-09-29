@@ -97,6 +97,10 @@ class Bin {
   sdesCrypt(key) {
     return SDes.crypt(this, key);
   }
+
+  sdesDecrypt(key) {
+    return SDes.decrypt(this, key);
+  }
 }
 
 export default Bin;

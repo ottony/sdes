@@ -20,6 +20,18 @@ class SDes {
     );
   }
 
+  static ip(bin) {
+    return bin.copy().permute(
+      [1, 5, 2, 0, 3, 7, 4, 6]
+    );
+  }
+
+  static inverse_ip(bin) {
+    return bin.copy().permute(
+      [3, 0, 2, 4, 6, 1, 7, 5]
+    );
+  }
+
   static s0(bin) {
     let b = [
       [1, 0, 3, 2],
@@ -92,31 +104,49 @@ class SDes {
     return( new Bin(result) );
   }
 
-  static switchToBin(left, right) {
+  static switch(fk, originalBin) {
+    let left, right;
+    [left, right] = originalBin.split();
+
     return new Bin([
       ...right,
-      ...left
+      ...fk.normalized
     ]);
   }
 
-  static crypt(bin, key) {
+  static fk(bin, k) {
     let left, right, expanded, sbox, p4;
-    let keys = this.keys(key);
-    let encrypt = bin.copy();
+    [left, right] = bin.split();
 
-    _.each(keys, (k) => {
-      [left, right] = encrypt.split();
+    expanded = this.expand(new Bin(right));
+    expanded.xor(k.normalized);
+    sbox = this.sbox(expanded);
+    p4   = this.p4(sbox);
+    return p4.xor(left);
+  }
 
-      expanded = this.expand(new Bin(right));
-      expanded.xor(k.normalized);
-      sbox = this.sbox(expanded);
-      p4   = this.p4(sbox);
-      p4.xor(left);
+  static crypt(bin, key) {
+    let k1, k2;
+    [k1, k2] = this.keys(key);
 
-      encrypt = this.switchToBin(p4.normalized, right);
-    });
+    let ip  = this.ip(bin.copy());
+    let fk1 = this.fk(ip, k1);
+    let sw  = this.switch(fk1, ip);
+    let fk2 = this.fk(sw, k2);
 
-    return encrypt;
+    return this.inverse_ip(fk2);
+  }
+
+  static decrypt(bin, key) {
+    let k1, k2;
+    [k1, k2] = this.keys(key);
+
+    let ip  = this.ip(bin.copy());
+    let fk2 = this.fk(ip, k2);
+    let sw  = this.switch(fk2, ip);
+    let fk1 = this.fk(sw, k1);
+
+    return this.inverse_ip(fk1);
   }
 }
 
