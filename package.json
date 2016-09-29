@@ -2,7 +2,7 @@
   "name": "sdes",
   "version": "1.0.0",
   "description": "Simple Des implementation",
-  "main": "app/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "prestart": "babel app --out-dir dist",
     "dev": "nodemon --exec babel-node app/index.js",
