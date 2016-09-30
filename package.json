@@ -8,7 +8,7 @@
     "dev": "nodemon --exec babel-node app/index.js",
     "start": "node dist/index.js"
   },
-  "author": "Ottony Costa",
+  "author": "Ottony Costa<ottony93@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "commander": "^2.9.0",
