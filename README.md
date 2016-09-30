@@ -6,6 +6,10 @@ S-DES is a didatic implementation of DES algorithm.
 First, import the dist/index.js file. It contain a BufferCrypt object with `sdesEncrypt` and `sdesDecrypt` static functions 
 
 ```javascript
+  var BufferCrypt = require('./dist/index.js');
+```
+
+```javascript
 BufferCrypt.sdesEncrypt(key, buffer)
 ```
 
@@ -15,14 +19,6 @@ BufferCrypt.sdesDecrypt(key, buffer)
 
 `key` is a integer key with 10 bits, that means betwen 0 and 1023.
 `buffer` is a node Buffer, see https://nodejs.org/api/buffer.html to more explanation.
-
-#### Alert
-Babel@6 doesn't export default module.exports any more - https://github.com/babel/babel/issues/2212
-so, when you require the file, call `.default` from that.
-
-```javascript
-  var BufferCrypt = require('./dist/index.js').default;
-```
 
 ## Development
 
@@ -36,6 +32,8 @@ npm run dev
 # Example
 
 ```javascript
+  var BufferCrypt = require('./dist/index.js');
+  
   let raw = new Buffer('|><+-àèìÒù');
   
   let key = 666;
