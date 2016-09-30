@@ -6,7 +6,7 @@ S-DES is a didatic implementation of DES algorithm.
 First, import the dist/index.js file. It contain a BufferCrypt object with `sdesEncrypt` and `sdesDecrypt` static functions 
 
 ```javascript
-  var BufferCrypt = require('./dist/index.js');
+  const BufferCrypt = require('./dist/index.js');
 ```
 
 ```javascript
