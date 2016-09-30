@@ -1,9 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _buffer_crypt = require('./models/buffer_crypt.js');
 
 var _buffer_crypt2 = _interopRequireDefault(_buffer_crypt);
@@ -37,4 +33,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *  console.log(dec);
  */
 
-exports.default = _buffer_crypt2.default;
+module.exports = _buffer_crypt2.default;

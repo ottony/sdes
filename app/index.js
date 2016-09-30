@@ -27,4 +27,4 @@ import BufferCrypt from './models/buffer_crypt.js';
  *  console.log(dec);
  */
 
-export default BufferCrypt;
+module.exports = BufferCrypt
